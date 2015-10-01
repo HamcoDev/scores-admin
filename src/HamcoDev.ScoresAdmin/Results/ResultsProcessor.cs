@@ -1,21 +1,24 @@
 namespace HamcoDev.ScoresAdmin.Results
 {
-    using System.Net;
-
-    using Newtonsoft.Json;
 
     public class ResultsProcessor : IResultsProcessor
     {
+        private readonly IFixtureReader fixtureReader;
+
+        public ResultsProcessor()
+        {
+            this.fixtureReader = new FixtureReader();
+        }
+
+        public ResultsProcessor(IFixtureReader fixtureReader)
+        {
+            this.fixtureReader = fixtureReader;
+        }
+
         public void Process()
         {
             // download results data
-            var url = "http://api.football-data.org/alpha/soccerseasons/398/fixtures?matchday=7";
-            using (var wc = new WebClient())
-            {
-                var json = wc.DownloadString(url);
-
-                var js = JsonConvert.DeserializeObject<RootObject>(json); 
-            }
+            var results = this.fixtureReader.GetResults();
         }
 
         public int CheckScore(Score actualScore, Score predictedScore)

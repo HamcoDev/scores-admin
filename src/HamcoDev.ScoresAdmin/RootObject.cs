@@ -53,6 +53,7 @@
         public Result result { get; set; }
     }
 
+
     public class RootObject
     {
         public List<Link> _links { get; set; }
