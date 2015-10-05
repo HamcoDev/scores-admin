@@ -1,26 +1,7 @@
 namespace HamcoDev.ScoresAdmin.Results
 {
-
     public class ResultsProcessor : IResultsProcessor
     {
-        private readonly IFixtureReader fixtureReader;
-
-        public ResultsProcessor()
-        {
-            this.fixtureReader = new FixtureReader();
-        }
-
-        public ResultsProcessor(IFixtureReader fixtureReader)
-        {
-            this.fixtureReader = fixtureReader;
-        }
-
-        public void Process()
-        {
-            // download results data
-            var results = this.fixtureReader.GetResults();
-        }
-
         public int CheckScore(Score predictedScore, Score actualScore)
         {
             if (actualScore.Home == predictedScore.Home && actualScore.Away == predictedScore.Away)

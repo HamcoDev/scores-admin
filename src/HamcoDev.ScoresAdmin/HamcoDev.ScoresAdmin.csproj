@@ -55,6 +55,7 @@
     <Compile Include="Results\IResultsProcessor.cs" />
     <Compile Include="Results\IScoresCalculator.cs" />
     <Compile Include="Results\Result.cs" />
+    <Compile Include="Results\ResultsPopulator.cs" />
     <Compile Include="Results\ResultsProcessor.cs" />
     <Compile Include="Results\Score.cs" />
     <Compile Include="Results\ScoresCalculator.cs" />
