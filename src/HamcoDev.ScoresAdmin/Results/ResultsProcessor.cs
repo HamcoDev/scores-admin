@@ -21,7 +21,7 @@ namespace HamcoDev.ScoresAdmin.Results
             var results = this.fixtureReader.GetResults();
         }
 
-        public int CheckScore(Score actualScore, Score predictedScore)
+        public int CheckScore(Score predictedScore, Score actualScore)
         {
             if (actualScore.Home == predictedScore.Home && actualScore.Away == predictedScore.Away)
             {

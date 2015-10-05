@@ -1,5 +1,6 @@
 namespace HamcoDev.ScoresAdmin.Results
 {
+    using System;
     using System.Collections.Generic;
     using System.Net;
     using System.Runtime.Remoting.Messaging;
@@ -27,7 +28,7 @@ namespace HamcoDev.ScoresAdmin.Results
                 results.Add(
                     new FixtureResult
                     {
-                        Date = fixture.date,
+                        Date = DateTime.Parse(fixture.date),
                         HomeTeam = fixture.homeTeamName,
                         AwayTeam = fixture.awayTeamName,
                         Score = new Score

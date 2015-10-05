@@ -7,13 +7,16 @@
         public static void Main(string[] args)
         {
             var p = new Program();
-            p.Run();
+            p.Run(args);
         }
 
-        private void Run()
+        private void Run(string[] args)
         {
-            var resultsProcessor = new ResultsProcessor();
-            resultsProcessor.Process();
+            if (args[1] == "1")
+            {
+                var resultPopulator = new ResultsPopulator();
+                resultPopulator.Run();
+            }
         }
     }
 }

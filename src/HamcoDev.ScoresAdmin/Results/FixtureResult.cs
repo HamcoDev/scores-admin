@@ -4,7 +4,7 @@
 
     public class FixtureResult
     {
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
 
         public Score Score { get; set; }
 

@@ -2,6 +2,6 @@
 {
     public interface IResultsProcessor
     {
-        int CheckScore(Score actualScore, Score predictedScore);
+        int CheckScore(Score predictedScore, Score actualScore);
     }
 }

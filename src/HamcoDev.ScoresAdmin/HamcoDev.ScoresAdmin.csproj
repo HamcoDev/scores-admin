@@ -53,9 +53,11 @@
     <Compile Include="Results\FixtureResult.cs" />
     <Compile Include="Results\IFixtureReader.cs" />
     <Compile Include="Results\IResultsProcessor.cs" />
+    <Compile Include="Results\IScoresCalculator.cs" />
     <Compile Include="Results\Result.cs" />
     <Compile Include="Results\ResultsProcessor.cs" />
     <Compile Include="Results\Score.cs" />
+    <Compile Include="Results\ScoresCalculator.cs" />
     <Compile Include="RootObject.cs" />
   </ItemGroup>
   <ItemGroup>

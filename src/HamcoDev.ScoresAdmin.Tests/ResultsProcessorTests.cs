@@ -4,7 +4,7 @@
 
     using Xunit;
 
-    public class ScoresAdminTests
+    public class ResultsProcessorTests
     {
         [Fact]
         public void CorrectScoreAssignsThreePoints()
