@@ -11,7 +11,8 @@
             var actualResults = fixtureReader.GetResults();
 
             // get predictions for user from The Firebase
-            var predictedResults = new List<FixtureResult>();
+            var predicationsReader = new PredictionReader();
+            var predictedResults = predicationsReader.GetPredictions("6098c704-b809-4722-add2-3caf30a44a13", 10);
 
             // call ScoresCalculator
             var scoresCalculator = new ScoresCalculator();
