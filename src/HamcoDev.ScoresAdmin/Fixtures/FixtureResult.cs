@@ -1,6 +1,9 @@
-﻿namespace HamcoDev.ScoresAdmin.Results
+﻿namespace HamcoDev.ScoresAdmin.Fixtures
 {
     using System;
+
+    using HamcoDev.ScoresAdmin.Results;
+    using HamcoDev.ScoresAdmin.Scores;
 
     public class FixtureResult
     {

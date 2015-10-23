@@ -1,18 +1,20 @@
-namespace HamcoDev.ScoresAdmin.Results
+namespace HamcoDev.ScoresAdmin.Fixtures
 {
     using System;
     using System.Collections.Generic;
     using System.Net;
-    using System.Runtime.Remoting.Messaging;
+
+    using HamcoDev.ScoresAdmin.Results;
+    using HamcoDev.ScoresAdmin.Scores;
 
     using Newtonsoft.Json;
 
     public class FixtureReader : IFixtureReader
     {
-        public List<FixtureResult> GetResults()
+        public List<FixtureResult> GetResults(int matchday)
         {
             var results = new List<FixtureResult>();
-            var url = "http://api.football-data.org/alpha/soccerseasons/398/fixtures?matchday=7";
+            var url = string.Format("http://api.football-data.org/alpha/soccerseasons/398/fixtures?matchday={0}", matchday);
 
             RootObject resultJson;
 

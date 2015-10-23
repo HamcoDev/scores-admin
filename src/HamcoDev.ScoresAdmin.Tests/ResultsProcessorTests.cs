@@ -1,6 +1,7 @@
 ﻿namespace HamcoDev.ScoresAdmin.Tests
 {
     using HamcoDev.ScoresAdmin.Results;
+    using HamcoDev.ScoresAdmin.Scores;
 
     using Xunit;
 

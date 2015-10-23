@@ -1,8 +1,11 @@
-namespace HamcoDev.ScoresAdmin.Results
+namespace HamcoDev.ScoresAdmin.Scores
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
+    using HamcoDev.ScoresAdmin.Fixtures;
+    using HamcoDev.ScoresAdmin.Results;
 
     public class ScoresCalculator : IScoresCalculator
     {

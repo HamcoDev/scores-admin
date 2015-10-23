@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net;
-using Newtonsoft.Json;
-
-namespace HamcoDev.ScoresAdmin.Results
+﻿namespace HamcoDev.ScoresAdmin.Predictions
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Net;
+
+    using HamcoDev.ScoresAdmin.Fixtures;
+    using HamcoDev.ScoresAdmin.Results;
+    using HamcoDev.ScoresAdmin.Scores;
+
+    using Newtonsoft.Json;
+
     public class PredictionReader : IPredictionReader
     {
         public List<FixtureResult> GetPredictions(string userId, int matchday)
@@ -16,16 +18,16 @@ namespace HamcoDev.ScoresAdmin.Results
 
             var url = string.Format("http://ionic-scores.firebaseio.com/scores/user/{0}/matchday/{1}.json", userId, matchday);
 
-            PredictionList resultJson;
+            RootObject resultJson;
 
             using (var wc = new WebClient())
             {
                 var json = wc.DownloadString(url);
 
-                resultJson = JsonConvert.DeserializeObject<PredictionList>(json);
+                resultJson = JsonConvert.DeserializeObject<RootObject>(json);
             }
 
-            foreach (var fixture in resultJson.fixtures)
+            foreach (var fixture in resultJson.fixture)
             {
                 predictions.Add(
                     new FixtureResult

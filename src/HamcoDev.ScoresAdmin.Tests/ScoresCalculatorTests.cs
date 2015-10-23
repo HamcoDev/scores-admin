@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
 
+    using HamcoDev.ScoresAdmin.Fixtures;
     using HamcoDev.ScoresAdmin.Results;
+    using HamcoDev.ScoresAdmin.Scores;
 
     using Moq;
 

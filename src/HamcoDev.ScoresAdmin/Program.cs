@@ -12,11 +12,8 @@
 
         private void Run(string[] args)
         {
-            if (args[1] == "1")
-            {
-                var resultPopulator = new ResultsPopulator();
-                resultPopulator.Run();
-            }
+            var resultPopulator = new ResultsPopulator(9);
+            resultPopulator.Run();
         }
     }
 }

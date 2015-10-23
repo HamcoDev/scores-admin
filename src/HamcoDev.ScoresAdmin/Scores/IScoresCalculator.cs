@@ -1,6 +1,8 @@
-namespace HamcoDev.ScoresAdmin.Results
+namespace HamcoDev.ScoresAdmin.Scores
 {
     using System.Collections.Generic;
+
+    using HamcoDev.ScoresAdmin.Fixtures;
 
     public interface IScoresCalculator
     {

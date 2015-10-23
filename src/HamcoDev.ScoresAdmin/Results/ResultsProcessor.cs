@@ -1,5 +1,7 @@
 namespace HamcoDev.ScoresAdmin.Results
 {
+    using HamcoDev.ScoresAdmin.Scores;
+
     public class ResultsProcessor : IResultsProcessor
     {
         public int CheckScore(Score predictedScore, Score actualScore)

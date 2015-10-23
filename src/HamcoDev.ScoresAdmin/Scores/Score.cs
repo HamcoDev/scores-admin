@@ -1,4 +1,4 @@
-﻿namespace HamcoDev.ScoresAdmin.Results
+﻿namespace HamcoDev.ScoresAdmin.Scores
 {
     public class Score
     {
