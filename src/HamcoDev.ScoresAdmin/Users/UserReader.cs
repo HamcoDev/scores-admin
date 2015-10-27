@@ -7,19 +7,19 @@
 
     public class UserReader : IUserReader
     {
-        public List<string> GetUserIds()
+        public List<User> GetUserIds()
         {
-            var predictions = new List<string>();
+            var users = new List<User>();
 
             var url = string.Format("http://ionic-scores.firebaseio.com/user.json");
 
-            RootObject resultJson;
+            User resultJson;
 
             using (var wc = new WebClient())
             {
                 var json = wc.DownloadString(url);
 
-                resultJson = JsonConvert.DeserializeObject<RootObject>(json);
+                resultJson = JsonConvert.DeserializeObject<User>(json);
             }
 
             return null;

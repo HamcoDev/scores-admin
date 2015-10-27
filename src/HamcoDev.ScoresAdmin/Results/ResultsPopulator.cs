@@ -29,7 +29,7 @@
 
             foreach (var user in users)
             {
-                var predictedResults = predicationsReader.GetPredictions(user, this.matchday);
+                var predictedResults = predicationsReader.GetPredictions(user.Id, this.matchday);
 
                 // call ScoresCalculator
                 var scoresCalculator = new ScoresCalculator();
@@ -37,7 +37,7 @@
 
                 // write results to the Firebase
                 var scoresWriter = new ScoresWriter();
-                scoresWriter.WriteScores(user, this.matchday, totalScore);
+                scoresWriter.WriteScores(user.Id, this.matchday, totalScore);
             }
         }
     }
