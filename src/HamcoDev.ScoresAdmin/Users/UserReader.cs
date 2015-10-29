@@ -3,26 +3,34 @@
     using System.Collections.Generic;
     using System.Net;
 
-    using Newtonsoft.Json;
-
     public class UserReader : IUserReader
     {
-        public List<User> GetUserIds()
+        public List<string> GetUserIds()
         {
-            var users = new List<User>();
+            var userIds = new List<string>();
 
-            var url = string.Format("http://ionic-scores.firebaseio.com/user.json");
-
-            User resultJson;
-
+            var url = string.Format("http://ionic-scores.firebaseio.com/users.json");
+            
             using (var wc = new WebClient())
             {
                 var json = wc.DownloadString(url);
 
-                resultJson = JsonConvert.DeserializeObject<User>(json);
+                var idArray = json.Split(new[] { "email" }, System.StringSplitOptions.RemoveEmptyEntries);
+
+                for (var i = 0; i < idArray.Length; i++)
+                {
+                    if (i == 0)
+                    {
+                        continue;
+                    }
+
+                    var userEntry = idArray[i];
+
+                    userIds.Add(userEntry.Substring(userEntry.IndexOf("id") + 5, 36));
+                }
             }
 
-            return null;
+            return userIds;
         }
     }
 }

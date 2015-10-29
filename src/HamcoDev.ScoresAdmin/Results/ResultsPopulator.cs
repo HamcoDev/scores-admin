@@ -1,6 +1,7 @@
 ﻿namespace HamcoDev.ScoresAdmin.Results
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     using HamcoDev.ScoresAdmin.Fixtures;
     using HamcoDev.ScoresAdmin.Predictions;
@@ -25,19 +26,23 @@
             var predicationsReader = new PredictionReader();
 
             var userReader = new UserReader();
-            var users = userReader.GetUserIds();
+            var userIds = userReader.GetUserIds();
 
-            foreach (var user in users)
+            foreach (var userId in userIds)
             {
-                var predictedResults = predicationsReader.GetPredictions(user.Id, this.matchday);
+                var predictedResults = predicationsReader.GetPredictions(userId, this.matchday);
 
-                // call ScoresCalculator
-                var scoresCalculator = new ScoresCalculator();
-                var totalScore = scoresCalculator.Calculate(predictedResults, actualResults);
+                var totalScore = 0;
+
+                if (predictedResults.Any())
+                {
+                    var scoresCalculator = new ScoresCalculator();
+                    totalScore = scoresCalculator.Calculate(predictedResults, actualResults);
+                }
 
                 // write results to the Firebase
                 var scoresWriter = new ScoresWriter();
-                scoresWriter.WriteScores(user.Id, this.matchday, totalScore);
+                scoresWriter.WriteScores(userId, this.matchday, totalScore);
             }
         }
     }

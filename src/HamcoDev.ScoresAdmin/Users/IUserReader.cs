@@ -4,6 +4,6 @@
 
     public interface IUserReader
     {
-        List<User> GetUserIds();
+        List<string> GetUserIds();
     }
 }

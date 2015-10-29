@@ -27,21 +27,24 @@
                 resultJson = JsonConvert.DeserializeObject<RootObject>(json);
             }
 
-            foreach (var fixture in resultJson.fixture)
+            if (resultJson != null && resultJson.fixture != null)
             {
-                predictions.Add(
-                    new FixtureResult
-                    {
-                        Date = DateTime.Parse(fixture.date),
-                        HomeTeam = fixture.homeTeam,
-                        AwayTeam = fixture.awayTeam,
-                        Score = new Score
+                foreach (var fixture in resultJson.fixture)
+                {
+                    predictions.Add(
+                        new FixtureResult
                         {
-                            Home = fixture.homePrediction,
-                            Away = fixture.awayPrediction
-                        }
-                    });
+                            Date = DateTime.Parse(fixture.date),
+                            HomeTeam = fixture.homeTeam,
+                            AwayTeam = fixture.awayTeam,
+                            Score = new Score
+                            {
+                                Home = fixture.homePrediction,
+                                Away = fixture.awayPrediction
+                            }
+                        });
 
+                }
             }
 
             return predictions;
