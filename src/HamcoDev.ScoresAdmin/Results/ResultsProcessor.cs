@@ -6,6 +6,11 @@ namespace HamcoDev.ScoresAdmin.Results
     {
         public int CheckScore(Score predictedScore, Score actualScore)
         {
+            if (actualScore.Home == -1 || actualScore.Away == -1)
+            {
+                return 0;
+            }
+
             if (actualScore.Home == predictedScore.Home && actualScore.Away == predictedScore.Away)
             {
                 return 3;

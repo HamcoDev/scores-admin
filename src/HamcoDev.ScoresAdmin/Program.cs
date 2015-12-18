@@ -1,5 +1,7 @@
 ﻿namespace HamcoDev.ScoresAdmin
 {
+    using System;
+
     using HamcoDev.ScoresAdmin.Results;
     using HamcoDev.ScoresAdmin.Scores;
 
@@ -15,6 +17,9 @@
         {
             var resultPopulator = new ResultsPopulator();
             resultPopulator.Run();
+
+            Console.WriteLine("Completed");
+            Console.Read();
         }
     }
 }

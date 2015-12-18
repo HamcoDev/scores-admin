@@ -63,11 +63,9 @@
     <Compile Include="Results\Result.cs" />
     <Compile Include="Results\ResultsPopulator.cs" />
     <Compile Include="Results\ResultsProcessor.cs" />
-    <Compile Include="Scores\IScoresWriter.cs" />
     <Compile Include="Scores\Score.cs" />
     <Compile Include="Scores\ScoresCalculator.cs" />
     <Compile Include="RootObject.cs" />
-    <Compile Include="Scores\ScoresWriter.cs" />
     <Compile Include="Users\IUserReader.cs" />
     <Compile Include="Users\User.cs" />
     <Compile Include="Users\UserReader.cs" />

@@ -1,5 +1,6 @@
 ﻿namespace HamcoDev.ScoresAdmin.Results
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -13,21 +14,19 @@
 
     public class ResultsPopulator
     {
-        private readonly IScoresWriter scoresWriter;
-
         private readonly IFirebase firebase;
 
         private int matchday;
 
         public ResultsPopulator()
         {
-            this.scoresWriter = new ScoresWriter();
             this.firebase = new Firebase();
         }
 
         public void Run()
         {
             this.matchday = this.firebase.ReadInt("/currentMatchday.json");
+            Console.WriteLine($"Processing matchday {this.matchday}");
             
             var fixtureReader = new FixtureReader();
             var actualResults = fixtureReader.GetResults(this.matchday);
@@ -44,6 +43,7 @@
         {
             foreach (var userId in userIds)
             {
+                Console.WriteLine($"Processing user {userId}");
                 var predictedResults = predicationsReader.GetPredictions(userId, this.matchday);
 
                 var matchdayTotal = 0;
@@ -54,8 +54,8 @@
                     matchdayTotal = scoresCalculator.Calculate(predictedResults, actualResults);
                 }
 
-                // write results to the Firebase
-                this.scoresWriter.WriteMatchdayScores(userId, this.matchday, matchdayTotal);
+                Console.WriteLine($"Weekly score: {matchdayTotal}");
+                this.firebase.Write($"/scores/user/{userId}/matchday/{this.matchday}/points.json", matchdayTotal.ToString());
 
                 this.WriteUserTotalScore(userId);
             }
@@ -75,6 +75,7 @@
                 }
             }
 
+            Console.WriteLine($"Total score: {totalScore}");
             this.firebase.Write($"/scores/user/{userId}/totalPoints.json", totalScore.ToString());
         }
     }
