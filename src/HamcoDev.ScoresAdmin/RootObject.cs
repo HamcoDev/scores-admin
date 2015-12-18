@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
 
+    using Newtonsoft.Json;
+
     public class Link
     {
         public string self { get; set; }
@@ -56,6 +58,7 @@
 
     public class RootObject
     {
+        [JsonIgnore]
         public List<Link> _links { get; set; }
         public int count { get; set; }
         public List<Fixture> fixtures { get; set; }

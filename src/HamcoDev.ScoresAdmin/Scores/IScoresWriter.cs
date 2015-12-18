@@ -2,6 +2,8 @@
 {
     public interface IScoresWriter
     {
-        string WriteScores(string userId, int matchday, int points);
+        string WriteMatchdayScores(string userId, int matchday, int points);
+
+        void WriteTotalScores(string userId, int matchdayTotal);
     }
 }

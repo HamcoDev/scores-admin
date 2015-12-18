@@ -1,6 +1,7 @@
 ﻿namespace HamcoDev.ScoresAdmin
 {
     using HamcoDev.ScoresAdmin.Results;
+    using HamcoDev.ScoresAdmin.Scores;
 
     class Program
     {
@@ -12,7 +13,7 @@
 
         private void Run(string[] args)
         {
-            var resultPopulator = new ResultsPopulator(9);
+            var resultPopulator = new ResultsPopulator();
             resultPopulator.Run();
         }
     }

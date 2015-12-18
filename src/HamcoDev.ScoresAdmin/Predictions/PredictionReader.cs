@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Net;
 
+    using HamcoDev.ScoresAdmin.Common;
     using HamcoDev.ScoresAdmin.Fixtures;
     using HamcoDev.ScoresAdmin.Results;
     using HamcoDev.ScoresAdmin.Scores;
@@ -12,20 +13,22 @@
 
     public class PredictionReader : IPredictionReader
     {
+        private readonly IFirebase firebase;
+
+        public PredictionReader()
+        {
+            this.firebase = new Firebase();
+        }
+
         public List<FixtureResult> GetPredictions(string userId, int matchday)
         {
             var predictions = new List<FixtureResult>();
 
-            var url = string.Format("http://ionic-scores.firebaseio.com/scores/user/{0}/matchday/{1}.json", userId, matchday);
+            var url = $"/scores/user/{userId}/matchday/{matchday}.json";
 
-            RootObject resultJson;
+            var json = this.firebase.Read(url);
 
-            using (var wc = new WebClient())
-            {
-                var json = wc.DownloadString(url);
-
-                resultJson = JsonConvert.DeserializeObject<RootObject>(json);
-            }
+            var resultJson = JsonConvert.DeserializeObject<RootObject>(json);
 
             if (resultJson != null && resultJson.fixture != null)
             {

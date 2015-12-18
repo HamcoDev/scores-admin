@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Firebase.cs" />
+    <Compile Include="Common\IFirebase.cs" />
     <Compile Include="PredictionList.cs" />
     <Compile Include="Predictions\RootObject.cs" />
     <Compile Include="Program.cs" />

@@ -14,7 +14,7 @@ namespace HamcoDev.ScoresAdmin.Fixtures
         public List<FixtureResult> GetResults(int matchday)
         {
             var results = new List<FixtureResult>();
-            var url = string.Format("http://api.football-data.org/alpha/soccerseasons/398/fixtures?matchday={0}", matchday);
+            var url = $"http://api.football-data.org/alpha/soccerseasons/398/fixtures?matchday={matchday}";
 
             RootObject resultJson;
 

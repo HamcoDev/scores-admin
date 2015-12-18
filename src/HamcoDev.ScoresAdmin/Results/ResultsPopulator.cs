@@ -3,23 +3,32 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    using HamcoDev.ScoresAdmin.Common;
     using HamcoDev.ScoresAdmin.Fixtures;
     using HamcoDev.ScoresAdmin.Predictions;
     using HamcoDev.ScoresAdmin.Scores;
     using HamcoDev.ScoresAdmin.Users;
 
+    using Newtonsoft.Json;
+
     public class ResultsPopulator
     {
-        private readonly int matchday;
+        private readonly IScoresWriter scoresWriter;
 
-        public ResultsPopulator(int matchday)
+        private readonly IFirebase firebase;
+
+        private int matchday;
+
+        public ResultsPopulator()
         {
-            this.matchday = matchday;
+            this.scoresWriter = new ScoresWriter();
+            this.firebase = new Firebase();
         }
 
         public void Run()
         {
-            // get results from api
+            this.matchday = this.firebase.ReadInt("/currentMatchday.json");
+            
             var fixtureReader = new FixtureReader();
             var actualResults = fixtureReader.GetResults(this.matchday);
 
@@ -28,22 +37,45 @@
             var userReader = new UserReader();
             var userIds = userReader.GetUserIds();
 
+            this.WriteUserWeeklyScore(userIds, predicationsReader, actualResults);
+        }
+
+        private void WriteUserWeeklyScore(IEnumerable<string> userIds, IPredictionReader predicationsReader, List<FixtureResult> actualResults)
+        {
             foreach (var userId in userIds)
             {
                 var predictedResults = predicationsReader.GetPredictions(userId, this.matchday);
 
-                var totalScore = 0;
+                var matchdayTotal = 0;
 
                 if (predictedResults.Any())
                 {
                     var scoresCalculator = new ScoresCalculator();
-                    totalScore = scoresCalculator.Calculate(predictedResults, actualResults);
+                    matchdayTotal = scoresCalculator.Calculate(predictedResults, actualResults);
                 }
 
                 // write results to the Firebase
-                var scoresWriter = new ScoresWriter();
-                scoresWriter.WriteScores(userId, this.matchday, totalScore);
+                this.scoresWriter.WriteMatchdayScores(userId, this.matchday, matchdayTotal);
+
+                this.WriteUserTotalScore(userId);
             }
+        }
+
+        private void WriteUserTotalScore(string userId)
+        {
+            var totalScore = 0;
+
+            for (var i = 1; i <= this.matchday; i++)
+            {
+                var json = this.firebase.Read($"/scores/user/{userId}/matchday/{i}/points.json");
+
+                if (json != "null")
+                {
+                    totalScore += JsonConvert.DeserializeObject<int>(json);
+                }
+            }
+
+            this.firebase.Write($"/scores/user/{userId}/totalPoints.json", totalScore.ToString());
         }
     }
 }
